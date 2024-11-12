@@ -3,7 +3,6 @@ import services1 from '../../assets/images/services1.png';
 import services2 from '../../assets/images/services2.png';
 
 const Services = () => {
-  // State to track the active content div
   const [activeIndex, setActiveIndex] = useState(null);
 
   const handleContentClick = (index) => {

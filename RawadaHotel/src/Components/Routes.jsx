@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import Rooms from './HomePage/Rooms';
+import LandingPage from './HomePage/LandingPage';
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Rooms />} />
+      <Route path="/" element={<LandingPage />} />
     </Routes>
   );
 };

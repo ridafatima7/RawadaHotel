@@ -11,15 +11,14 @@ const Rooms = () => {
       <div className="py-12 container">
         <h2 className="text-lg text-center subheading">Our Rooms</h2>
         <h3 className="text-xl mt-2 pt-2 pb-12 text-center heading">A World of Choices</h3>
-
-        <div className="flex gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
           <div className="w-full md:w-2/5 text-left relative">
             <img
               src={room1}
-              alt="Main room image"
+              alt="Mainroomimage"
               className="w-full rounded-md h-auto object-cover mx-auto"
             />
-            <div className="absolute right-0 top-20 transform -translate-y-1/2 dark-gray-background bg-opacity-70 text-white p-2 ">
+            <div className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-70 text-white p-2">
               From PKR 5000
             </div>
             <div className="mt-2">
@@ -27,16 +26,16 @@ const Rooms = () => {
               <p className="text-lg font-semibold">Deluxe Room</p>
             </div>
           </div>
-          <div className="w-full md:w-3/5 grid grid-cols-2 gap-4">
+          <div className="w-full md:w-3/5 grid grid-cols-1 md:grid-cols-2 gap-4">
             {[room2, room3, room4, room5].map((room, index) => (
               <div key={index} className="relative text-left">
                 <img
                   src={room}
                   alt={`Room image ${index + 1}`}
-                  className="w-full room-grid-images rounded-md object-cover mx-auto"
+                  className="w-full room-grid-images md:h-auto rounded-md object-cover mx-auto"
                 />
-                <div className="absolute right-0 top-20 transform dark-gray-background -translate-y-1/2  bg-opacity-70 text-white p-2 ">
-                  From PKR 5000
+                <div className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-70 text-white p-2">
+                  From PKR 4000
                 </div>
                 <div className="mt-2">
                   <p className="text-xs">2 Guests</p>
@@ -47,7 +46,7 @@ const Rooms = () => {
           </div>
         </div>
         <div className="flex justify-center mt-9">
-          <button className=" bg-black text-white font-semibold  hover:bg-opacity-80">
+          <button className="bg-black text-white font-semibold hover:bg-opacity-80">
             Book Now
           </button>
         </div>

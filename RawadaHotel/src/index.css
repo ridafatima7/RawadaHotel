@@ -34,6 +34,7 @@ body, #App {
 .subheading{
  color:var(--dark-gray);
  font-size:24px;
+ text-transform: uppercase;
 }
 .textSmall{
     color:var(--dark-gray);
@@ -42,7 +43,8 @@ body, #App {
 .heading{
     font-weight: 300;
     color:black;
-    font-size:40px;
+    font-size:35px;
+    text-transform: capitalize;
 }
 button{
     text-transform: capitalize;
@@ -51,7 +53,7 @@ button{
     outline: none;
     text-wrap: nowrap;
     border:none;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 600;
     color: white;
     cursor: pointer;

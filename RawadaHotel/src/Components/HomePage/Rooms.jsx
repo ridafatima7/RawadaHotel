@@ -18,7 +18,7 @@ const Rooms = () => {
               alt="Mainroomimage"
               className="w-full rounded-md h-auto object-cover mx-auto"
             />
-            <div className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-70 text-white p-2">
+            <div className="absolute right-0 top-20 transform -translate-y-1/2 bg-black bg-opacity-70 text-white p-2">
               From PKR 5000
             </div>
             <div className="mt-2">
@@ -34,7 +34,7 @@ const Rooms = () => {
                   alt={`Room image ${index + 1}`}
                   className="w-full room-grid-images md:h-auto rounded-md object-cover mx-auto"
                 />
-                <div className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-70 text-white p-2">
+                <div className="absolute right-0 top-20 transform -translate-y-1/2 bg-black bg-opacity-70 text-white p-2">
                   From PKR 4000
                 </div>
                 <div className="mt-2">

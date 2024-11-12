@@ -6,7 +6,7 @@
 :root{
     --pink-background:#FFF9F7;
     --text-color:#7F7C7B;
-    --dark-gray:#59595A;
+    --dark-gray:#705e59;
 }
 body, #App {
     box-sizing: border-box;

@@ -16,7 +16,15 @@
   .stayUsSection .textSmall {
     color: rgba(255, 255, 255, 0.7); 
   }
+  
+/* ----------------Services--------------- */
+.tab-default {
+  border: 1px solid #ccc; 
+}
 
+.tab-active {
+  border: 2px solid var(--dark-gray); 
+}
 @media (max-width: 768px) {
 
     /* ------------------Rooms------------------ */

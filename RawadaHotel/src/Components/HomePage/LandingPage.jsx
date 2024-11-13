@@ -1,8 +1,9 @@
-import React from 'react'
-import HomeAboutUs from './HomeAboutUs'
-import Rooms from './Rooms'
-import StaywithUs from './StaywithUs'
-import Services from './Services'
+import React from 'react';
+import HomeAboutUs from './HomeAboutUs';
+import Rooms from './Rooms';
+import StaywithUs from './StaywithUs';
+import Services from './Services';
+import Reviews from './Reviews';
 
 const LandingPage = () => {
   return (
@@ -11,6 +12,7 @@ const LandingPage = () => {
      <Services />
      <Rooms />
      <StaywithUs />
+     <Reviews />
    </section>
   )
 }

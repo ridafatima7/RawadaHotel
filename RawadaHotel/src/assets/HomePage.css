@@ -1,4 +1,5 @@
-/* ------------------Rooms------------------ */
+/* ------------------Rooms--------------------------*/
+
 .room-grid-images{
     height:15.54rem;
 }
@@ -17,7 +18,8 @@
     color: rgba(255, 255, 255, 0.7); 
   }
   
-/* ----------------Services--------------- */
+/* ------------------Services------------------------ */
+
 .tab-default {
   border: 1px solid #ccc; 
 }
@@ -25,10 +27,39 @@
 .tab-active {
   border: 2px solid var(--dark-gray); 
 }
+
+/* ------------------Navbar--------------------------*/
+.nav-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::before {
+  width: 100%;
+}
+
+/* -----------------HomeAbout------------------- */
+
+.lineHeight{
+  line-height: 2.3;
+}
+
 @media (max-width: 768px) {
 
     /* ------------------Rooms------------------ */
+
     .room-grid-single-column img {
         height: auto;
     }
+    /* -----------------HomeAbout------------------- */
+
+   .lineHeight{
+       line-height: 2;
+     }
   }

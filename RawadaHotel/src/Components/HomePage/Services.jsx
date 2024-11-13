@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import services1 from '../../assets/images/services1.png';
 import services2 from '../../assets/images/services2.png';
-
 const Services = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-
   const handleContentClick = (index) => {
     setActiveIndex(index);
   };
-
   return (
     <section className="container mx-auto py-12 px-4 ">
       <h2 className="text-lg text-left subheading">Our Services</h2>

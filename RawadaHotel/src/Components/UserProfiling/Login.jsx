@@ -2,9 +2,11 @@ import React from 'react'
 
 const Login = () => {
   return (
-    <div>
-      
-    </div>
+    <section className=''>
+      <div className=''>
+         
+      </div>
+    </section>
   )
 }
 

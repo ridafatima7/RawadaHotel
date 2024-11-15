@@ -4,7 +4,7 @@ import ammenity2 from '../../assets/images/ammenity2.png';
 import ammenity3 from '../../assets/images/ammenity3.png';
 import ammenity4 from '../../assets/images/ammenity4.png';
 import staff from '../../assets/images/staff.png';
-
+import Motif from '../../assets/images/ammenitiesMotif.png';
 const Ammenities = () => {
   return (
     <section className="container py-12">

@@ -7,7 +7,8 @@ import user1 from '../../assets/images/user1.png';
 import user2 from '../../assets/images/user2.png';
 import user3 from '../../assets/images/user3.png';
 import { FaStar } from 'react-icons/fa';
-
+import leftMotif from '../../assets/images/reviewBottom.png';
+import rightMotif from '../../assets/images/reviewUp.png';
 const Reviews = () => {
   const reviews = [
     { id: 1, img: user1, rating: 5, comment: "This was the best experience I've ever had! Highly recommended.", name: 'John Doe' },

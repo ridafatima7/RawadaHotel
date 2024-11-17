@@ -129,9 +129,30 @@ button:hover{
     border-color: #ccc;
     cursor: not-allowed;
   }
+  /* Default Image Style */
+.review-slide .review-image {
+  height: 18rem;
+  object-fit: contain;
+}
+.swiper-container {
+  overflow: visible;
+}
+/* Active Slide Image Style */
+.swiper-slide-active .review-image {
+  height: 25rem;
+  transition: height 0.5s ease-in-out;
+}
+.review-slide {
+  transition: transform 0.3s ease-in-out;
+}
+
   @media (max-width: 768px) {
     .custom-navigation {
         margin-right:1.5rem;
         margin-top:1rem;
+    }
+    .swiper-slide-active .review-image {
+      height: 18rem;
+      transition: height 0.5s ease-in-out;
     }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Logo from '../../assets/images/LogoWhite.png';
 import { CgProfile } from 'react-icons/cg';
 import { FaBars } from 'react-icons/fa';
@@ -6,13 +6,33 @@ import { IoMdClose } from 'react-icons/io';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const [navbarBg, setNavbarBg] = useState('transparent');
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroSection = document.querySelector('#HeroSection');
+      const heroBottom = heroSection?.getBoundingClientRect().bottom || 0;
 
+      // Change background color based on scroll position
+      if (heroBottom <= 0) {
+        setNavbarBg('#705e59'); 
+      } else {
+        setNavbarBg('transparent'); 
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
-    <nav className="fixed top-0 left-0 w-full bg-transparent text-white py-4 z-10">
+    <nav className="fixed top-0 left-0 w-full  text-white py-4 z-100" style={{
+      backgroundColor: navbarBg,
+      transition: 'background-color 0.3s ease-in-out',
+    }}>
       <div className="container mx-auto flex justify-between items-center px-4">
 
         {/* Hamburger Icon for Mobile */}

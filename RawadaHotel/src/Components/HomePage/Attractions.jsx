@@ -62,7 +62,7 @@ const Attractions = () => {
     const swiper = swiperRef.current?.swiper;
     if (swiper) {
       swiper.on("slideChange", updateButtonState);
-      updateButtonState(); // Initial state
+      updateButtonState();
     }
 
     return () => {

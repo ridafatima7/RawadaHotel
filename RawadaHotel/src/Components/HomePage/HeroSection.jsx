@@ -11,6 +11,7 @@ const HeroSection = () => {
         backgroundPosition: 'center',
         height: '95vh'
       }}
+      id="HeroSection"
     >
       <div className="container mx-auto text-center text-white stayUsSection items-center flex flex-col  justify-center ">
         <h2 className="text-lg mt-8 subheading tracking-[.25em] font-montserrat font-light">EXPLORE LUXURY HOTEL</h2>

@@ -49,6 +49,14 @@
 .lineHeight{
   line-height: 2.3;
 }
+/* -----------------HeroSection------------------- */
+.heroCheck-in{
+  color:var(--dark-gray);
+    font-size:13px;
+}
+
+
+
 
 @media (max-width: 768px) {
 

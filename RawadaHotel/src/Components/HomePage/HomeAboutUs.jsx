@@ -6,7 +6,6 @@ const HomeAboutUs = () => {
   return (
     <section>
       <div className="relative mx-auto px-4 py-8 text-center overflow-hidden">
-      {/* Heading Container */}
       <div className="container mx-auto">
         <h2 className="text-2xl md:text-4xl font-light text-gray-700">
           <span>Where <span className="cormorant-bold text-4xl md:text-6xl">Comfort</span> Meets <span className="cormorant-bold text-4xl md:text-6xl">Luxury</span></span>

@@ -3,7 +3,7 @@ import Logo from '../../assets/images/LogoWhite.png';
 import { CgProfile } from 'react-icons/cg';
 import { FaBars } from 'react-icons/fa';
 import { IoMdClose } from 'react-icons/io';
-
+import {Link} from 'react-router-dom';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [navbarBg, setNavbarBg] = useState('transparent');
@@ -12,7 +12,8 @@ const Navbar = () => {
   };
   useEffect(() => {
     const handleScroll = () => {
-      const heroSection = document.querySelector('#HeroSection');
+      // const heroSection = document.querySelector('#HeroSection');
+      const roomSection = document.querySelector('#hotelRooms');
       const heroBottom = heroSection?.getBoundingClientRect().bottom || 0;
 
       // Change background color based on scroll position
@@ -29,7 +30,7 @@ const Navbar = () => {
     };
   }, []);
   return (
-    <nav className="fixed top-0 left-0 w-full  text-white py-4 z-100" style={{
+    <nav className="fixed top-0 left-0 w-full  text-white py-4 z-1000" style={{
       backgroundColor: navbarBg,
       transition: 'background-color 0.3s ease-in-out',
     }}>
@@ -41,9 +42,9 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <div className="flex items-center justify-center">
+        <Link to="/"><div className="flex items-center justify-center cursor-pointer">
           <img src={Logo} alt="Logo" className="h-16" />
-        </div>
+        </div></Link>
 
         {/* Profile Icon for Mobile */}
         <div className="md:hidden">
@@ -52,11 +53,11 @@ const Navbar = () => {
 
         {/* Navigation Links for Desktop (768px and above) */}
         <div className="hidden md:flex space-x-6 text-lg">
-          <a href="/" className="nav-link relative pb-1">Home</a>
-          <a href="#services" className="nav-link relative pb-1">Services</a>
-          <a href="#news" className="nav-link relative pb-1">News</a>
-          <a href="#about" className="nav-link relative pb-1">About Us</a>
-          <a href="#contact" className="nav-link relative pb-1">Contact</a>
+          <Link to="/" className="nav-link relative pb-1">Home</Link>
+          <Link to="/rooms" className="nav-link relative pb-1">Services</Link>
+          <Link to="#news" className="nav-link relative pb-1">News</Link>
+          <Link to="#about" className="nav-link relative pb-1">About Us</Link>
+          <Link to="#contact" className="nav-link relative pb-1">Contact</Link>
         </div>
 
 
@@ -64,7 +65,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-4">
           <div className="flex items-center space-x-2">
             <CgProfile className="text-2xl" />
-            <a href="#signin" className="hover:text-gray-300">Sign In</a>
+            <Link to="#signin" className="hover:text-gray-300">Sign In</Link>
           </div>
           <button className="bg-white text-black px-4 py-2 transition hover:bg-gray-200">Book Now</button>
         </div>
@@ -85,15 +86,15 @@ const Navbar = () => {
           <IoMdClose className="text-2xl cursor-pointer" onClick={toggleSidebar} />
         </div>
         <div className="flex flex-col space-y-4 px-4 mt-4 text-lg">
-          <a href="/" className="hover:text-gray-400" onClick={toggleSidebar}>Home</a>
-          <a href="#services" className="hover:text-gray-400" onClick={toggleSidebar}>Services</a>
-          <a href="#news" className="hover:text-gray-400" onClick={toggleSidebar}>News</a>
-          <a href="#about" className="hover:text-gray-400" onClick={toggleSidebar}>About Us</a>
-          <a href="#contact" className="hover:text-gray-400" onClick={toggleSidebar}>Contact</a>
-          <a href="#signin" className="hover:text-gray-400 flex items-center space-x-2" onClick={toggleSidebar}>
+          <Link to="/" className="hover:text-gray-400" onClick={toggleSidebar}>Home</Link>
+          <Link to="/rooms" className="hover:text-gray-400" onClick={toggleSidebar}>Services</Link>
+          <Link to="#news" className="hover:text-gray-400" onClick={toggleSidebar}>News</Link>
+          <Link to="#about" className="hover:text-gray-400" onClick={toggleSidebar}>About Us</Link>
+          <Link to="#contact" className="hover:text-gray-400" onClick={toggleSidebar}>Contact</Link>
+          <Link to="#signin" className="hover:text-gray-400 flex items-center space-x-2" onClick={toggleSidebar}>
             <CgProfile className="text-2xl" />
             <span>Sign In</span>
-          </a>
+          </Link>
           <button className="bg-white text-black px-4 py-2 mt-4 rounded-md transition hover:bg-gray-200">
             Book Now
           </button>

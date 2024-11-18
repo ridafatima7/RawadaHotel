@@ -28,7 +28,6 @@ const HotelRooms = () => {
                     <h3 className="text-xl mt-2 pt-2 pb-12 text-center heading">what client says about us</h3>
                 </div>
             </section>
-
         </>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import heroBackground from '../../assets/images/Roombg.png';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -15,6 +15,7 @@ import snakbar from "../../assets/icons/snakbar.png";
 import kettle from "../../assets/icons/kettle.png";
 const HotelRooms = () => {
     const swiperRef = useRef(null);
+    const [activeTab, setActiveTab] = useState('Rooms');
     // Function to update button states
     const updateButtonState = () => {
         const swiper = swiperRef.current?.swiper;
@@ -91,21 +92,126 @@ const HotelRooms = () => {
     return (
         <>
             {/* ---------------First Section------------- */}
-            <section className="bg-gray-800 text-white stayUsSection py-16 flex items-center justify-center "
+            <section
+                className="bg-gray-800 text-white stayUsSection py-16 flex items-center justify-center relative"
                 style={{
                     backgroundImage: `url(${heroBackground})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    height: '95vh'
+                    height: '95vh',
                 }}
                 id="hotelRooms"
             >
-                <h3 className="text-2xl mt-3 md:text-5xl pt-2 heading font-bold" style={{ fontFamily: 'Cormorant Garamond, serif', textTransform: 'uppercase', fontWeight: '1000' }} >
+                <h3
+                    className="text-2xl mt-3 md:text-5xl pt-2 heading font-bold"
+                    style={{
+                        fontFamily: 'Cormorant Garamond, serif',
+                        textTransform: 'uppercase',
+                        fontWeight: '1000',
+                    }}
+                >
                     Rooms
                 </h3>
+                <div className="absolute bottom-5 left-10 flex space-x-9">
+                    <div
+                        className={`tab cursor-pointer relative ${activeTab === 'Rooms' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveTab('Rooms');
+                            document.getElementById('rawadaRooms').scrollIntoView({ behavior: 'smooth' });
+                        }}
+                    >
+                        <span className="text-lg font-light">Rooms</span>
+                    </div>
+                    <div
+                        className={`tab cursor-pointer relative ${activeTab === 'Amenities' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveTab('Amenities');
+                            document.getElementById('hotelAmmenities').scrollIntoView({ behavior: 'smooth' });
+                        }}
+                    >
+                        <span className="text-lg font-light">Amenities</span>
+                    </div>
+                    <div
+                        className={`tab cursor-pointer relative ${activeTab === 'Testimonials' ? 'active' : ''}`}
+                        onClick={() => {
+                            setActiveTab('Testimonials');
+                            document.getElementById('hotelReviews').scrollIntoView({ behavior: 'smooth' });
+                        }}
+                    >
+                        <span className="text-lg font-light">Testimonials</span>
+                    </div>
+
+                </div>
+            </section>
+            {/* ---------------Rawada Rooms------------- */}
+            <section className='container py-12' id='rawadaRooms'>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div className="lg:col-span-2  rounded-lg">
+                        <div className='flex w-full flex-row'>
+                            <div className="width-[35%]">
+                                <img
+                                    src={heroBackground}
+                                    alt="Room Image 2"
+                                    className="w-full h-56"
+                                />
+                                {/* <Swiper
+                                    spaceBetween={10}
+                                    navigation={true}
+                                    className="mySwiper"
+                                >
+                                    <SwiperSlide>
+                                        <img
+                                            src={heroBackground}
+                                            alt="Room Image 1"
+                                            className="w-full h-auto rounded-lg"
+                                        />
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <img
+                                            src={heroBackground}
+                                            alt="Room Image 2"
+                                            className="w-full h-auto rounded-lg"
+                                        />
+                                    </SwiperSlide>
+                                </Swiper> */}
+                            </div>
+                            <div className="lg:col-span-1 width-[35%]  p-6 rounded-lg space-y-4">
+                                <h3 className="text-2xl font-light text-gray-800">Deluxe Room</h3>
+                                <div className="flex flex-col space-y-2">
+                                    <p className="text-xs"  style={{color:"#368aff"}}>Room Size: 322 Sq feet</p>
+                                    <p className="text-xs"  style={{color:"#368aff"}}>Bed size: 1 king/queen or twin</p>
+                                    <p className="text-xs">Pearl is committed to creating and consistently delivering world-class luxury experiences.</p>
+                                    <div className="flex flex-col space-y-2">
+                                        <ul className="list-disc pl-5">
+                                            <li className="textSmall">Non Refundable</li>
+                                            <li className="textSmall">Full payment in advance</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className=" width-[30%] py-6 pr-6 rounded-lg ">
+                                <h4 className="textSmall">Start from</h4>
+                                <p className="text-2xl font-semibold text-gray-800">$56<span className='textSmall uppercase'>/night</span></p>
+                                <div className="mt-4">
+                                    <select
+                                        id="room-select"
+                                        className="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    >
+                                        <option value="deluxe">Room 0</option>
+                                        <option value="premium">Room 1</option>
+                                        <option value="standard">Room 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+
+                    </div>
+                </div>
             </section>
             {/* ---------------Ammenities------------- */}
-            <section className="container-pink">
+            <section className="container-pink" id='hotelAmmenities'>
                 <div className="container py-12">
                     <h2 className="text-lg text-start subheading">AMENTIES & FACILTIES</h2>
                     <h3 className="text-xl mt-2 pt-2 pb-12 text-start heading">
@@ -115,17 +221,19 @@ const HotelRooms = () => {
                         {amenities.map((amenity, index) => (
                             <div
                                 key={index}
-                                className="bg-white p-6 flex flex-col items-center text-center shadow-md rounded-md"
+                                className=" cursor-pointer transform transition-transform duration-300 ease-in-out hover:scale-105 bg-white p-6 flex flex-col items-center text-center shadow-md rounded-md"
                             >
                                 <div className="mb-4">{amenity.icon}</div>
-                                <h4 className="text-md " style={{fontWeight:"400",color:"#705e59"}}>{amenity.name}</h4>
+                                <h4 className="text-md" style={{ fontWeight: "400", color: "#705e59" }}>
+                                    {amenity.name}
+                                </h4>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
             {/* ---------------Reviews------------- */}
-            <section className="container py-12">
+            <section className="container py-12" id='hotelReviews'>
                 <div className="">
                     <h2 className="text-lg text-center subheading">TESTIMONIAL</h2>
                     <h3 className="text-xl mt-2 pt-2 text-center heading">
@@ -135,7 +243,7 @@ const HotelRooms = () => {
                 <div className="relative">
                     <Swiper
                         slidesPerView={1}
-                        loop={true}
+                        // loop={true}
                         //   modules={[Navigation]}
                         ref={swiperRef}
                     >

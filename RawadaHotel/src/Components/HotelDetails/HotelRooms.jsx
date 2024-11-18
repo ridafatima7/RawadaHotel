@@ -3,10 +3,9 @@ import heroBackground from '../../assets/images/Roombg.png';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Autoplay, Navigation } from 'swiper/modules';
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
-import { IoWifi } from "react-icons/io5";
 import comma from "../../assets/icons/Quote.png";
+import { IoWifi } from "react-icons/io5";
 import bathroom from "../../assets/icons/bathroom.png";
 import breakfast from "../../assets/icons/breakfast.png";
 import extrablanket from "../../assets/icons/ExtraBlanket.png";
@@ -16,7 +15,6 @@ import snakbar from "../../assets/icons/snakbar.png";
 import kettle from "../../assets/icons/kettle.png";
 const HotelRooms = () => {
     const swiperRef = useRef(null);
-
     // Function to update button states
     const updateButtonState = () => {
         const swiper = swiperRef.current?.swiper;
@@ -38,7 +36,6 @@ const HotelRooms = () => {
             nextButton?.classList.remove("disabled");
         }
     };
-
     useEffect(() => {
         const swiper = swiperRef.current?.swiper;
 
@@ -81,9 +78,19 @@ const HotelRooms = () => {
             designation: "CEO of Alphabet",
         },
     ];
-
+    const amenities = [
+        { icon: <IoWifi className="text-4xl text-gray-600" />, name: "WiFi" },
+        { icon: <img src={bathroom} alt="Bathroom" className="w-12 h-12" />, name: "Bathroom" },
+        { icon: <img src={breakfast} alt="Breakfast" className="w-12 h-12" />, name: "Breakfast" },
+        { icon: <img src={extrablanket} alt="Extra Blanket" className="w-12 h-12" />, name: "Extra Blanket" },
+        { icon: <img src={fridge} alt="Fridge" className="w-12 h-12" />, name: "Fridge" },
+        { icon: <img src={housekeeping} alt="Housekeeping" className="w-12 h-12" />, name: "Housekeeping" },
+        { icon: <img src={snakbar} alt="Snack Bar" className="w-12 h-12" />, name: "Snack Bar" },
+        { icon: <img src={kettle} alt="Kettle" className="w-12 h-12" />, name: "Kettle" },
+    ];
     return (
         <>
+            {/* ---------------First Section------------- */}
             <section className="bg-gray-800 text-white stayUsSection py-16 flex items-center justify-center "
                 style={{
                     backgroundImage: `url(${heroBackground})`,
@@ -98,10 +105,23 @@ const HotelRooms = () => {
                 </h3>
             </section>
             {/* ---------------Ammenities------------- */}
-            <section className='container-pink'>
-                <div className='container py-12'>
+            <section className="container-pink">
+                <div className="container py-12">
                     <h2 className="text-lg text-start subheading">AMENTIES & FACILTIES</h2>
-                    <h3 className="text-xl mt-2 pt-2 pb-12 text-start heading">We Provide best room facilties</h3>
+                    <h3 className="text-xl mt-2 pt-2 pb-12 text-start heading">
+                        We Provide Best Room Facilities
+                    </h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {amenities.map((amenity, index) => (
+                            <div
+                                key={index}
+                                className="bg-white p-6 flex flex-col items-center text-center shadow-md rounded-md"
+                            >
+                                <div className="mb-4">{amenity.icon}</div>
+                                <h4 className="text-md " style={{fontWeight:"400",color:"#705e59"}}>{amenity.name}</h4>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
             {/* ---------------Reviews------------- */}
@@ -139,7 +159,7 @@ const HotelRooms = () => {
 
                     {/* rooms Navigation Buttons */}
                     <div className="absolute top-5/6 left-0 cursor-pointer transform border border-gray-300 rounded-full shadow-md -translate-y-1/2"
-                    onClick={() => swiperRef.current?.swiper.slidePrev()}
+                        onClick={() => swiperRef.current?.swiper.slidePrev()}
                     >
                         <button
                             className="rooms-prev cursor-pointer p-3"
@@ -147,8 +167,8 @@ const HotelRooms = () => {
                             <GrLinkPrevious className="text-3xl text-gray-600 hover:text-gray-900" />
                         </button>
                     </div>
-                    <div className="absolute top-5/6 right-0 cursor-pointer border border-gray-300 rounded-full shadow-md transform -translate-y-1/2" 
-                    onClick={() => swiperRef.current?.swiper.slideNext()}
+                    <div className="absolute top-5/6 right-0 cursor-pointer border border-gray-300 rounded-full shadow-md transform -translate-y-1/2"
+                        onClick={() => swiperRef.current?.swiper.slideNext()}
                     >
                         <button
                             className="rooms-next cursor-pointer  p-3"

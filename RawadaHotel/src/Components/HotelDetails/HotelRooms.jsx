@@ -1,10 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import heroBackground from '../../assets/images/Roombg.png';
+import heroImage from '../../assets/images/Background.png';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 import comma from "../../assets/icons/Quote.png";
+import { Link } from 'react-router-dom';
 import { IoWifi } from "react-icons/io5";
 import bathroom from "../../assets/icons/bathroom.png";
 import breakfast from "../../assets/icons/breakfast.png";
@@ -146,11 +148,11 @@ const HotelRooms = () => {
             {/* ---------------Rawada Rooms------------- */}
             <section className='container py-12' id='rawadaRooms'>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div className="lg:col-span-2  rounded-lg">
-                        <div className='flex w-full flex-row'>
+                    <div className="lg:col-span-2  rounded-lg ">
+                        <div className='flex w-full flex-row mb-5 border border-l border-gray-300'>
                             <div className="width-[35%]">
                                 <img
-                                    src={heroBackground}
+                                    src={heroImage}
                                     alt="Room Image 2"
                                     className="w-full h-56"
                                 />
@@ -175,11 +177,11 @@ const HotelRooms = () => {
                                     </SwiperSlide>
                                 </Swiper> */}
                             </div>
-                            <div className="lg:col-span-1 width-[35%]  p-6 rounded-lg space-y-4">
+                            <div className="lg:col-span-1 width-[35%]  p-6 rounded-lg space-y-3">
                                 <h3 className="text-2xl font-light text-gray-800">Deluxe Room</h3>
                                 <div className="flex flex-col space-y-2">
-                                    <p className="text-xs"  style={{color:"#368aff"}}>Room Size: 322 Sq feet</p>
-                                    <p className="text-xs"  style={{color:"#368aff"}}>Bed size: 1 king/queen or twin</p>
+                                    <p className="text-xs" style={{ color: "#368aff" }}>Room Size: 322 Sq feet</p>
+                                    <p className="text-xs" style={{ color: "#368aff" }}>Bed size: 1 king/queen or twin</p>
                                     <p className="text-xs">Pearl is committed to creating and consistently delivering world-class luxury experiences.</p>
                                     <div className="flex flex-col space-y-2">
                                         <ul className="list-disc pl-5">
@@ -191,7 +193,64 @@ const HotelRooms = () => {
                             </div>
                             <div className=" width-[30%] py-6 pr-6 rounded-lg ">
                                 <h4 className="textSmall">Start from</h4>
-                                <p className="text-2xl font-semibold text-gray-800">$56<span className='textSmall uppercase'>/night</span></p>
+                                <p className="text-2xl font-medium text-gray-800">$56<span className='textSmall uppercase'>/night</span></p>
+                                <div className="mt-4">
+                                    <select
+                                        id="room-select"
+                                        className="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    >
+                                        <option value="deluxe">Room 0</option>
+                                        <option value="premium">Room 1</option>
+                                        <option value="standard">Room 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='flex w-full  flex-row mb-5 border border-l border-gray-300'>
+                            <div className="width-[35%]">
+                                <img
+                                    src={heroImage}
+                                    alt="Room Image 2"
+                                    className="w-full h-56"
+                                />
+                                {/* <Swiper
+                                    spaceBetween={10}
+                                    navigation={true}
+                                    className="mySwiper"
+                                >
+                                    <SwiperSlide>
+                                        <img
+                                            src={heroBackground}
+                                            alt="Room Image 1"
+                                            className="w-full h-auto rounded-lg"
+                                        />
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <img
+                                            src={heroBackground}
+                                            alt="Room Image 2"
+                                            className="w-full h-auto rounded-lg"
+                                        />
+                                    </SwiperSlide>
+                                </Swiper> */}
+                            </div>
+                            <div className="lg:col-span-1 width-[35%]  p-6 rounded-lg space-y-3">
+                                <h3 className="text-2xl font-light text-gray-800">Deluxe Room</h3>
+                                <div className="flex flex-col space-y-2">
+                                    <p className="text-xs" style={{ color: "#368aff" }}>Room Size: 322 Sq feet</p>
+                                    <p className="text-xs" style={{ color: "#368aff" }}>Bed size: 1 king/queen or twin</p>
+                                    <p className="text-xs">Pearl is committed to creating and consistently delivering world-class luxury experiences.</p>
+                                    <div className="flex flex-col space-y-2">
+                                        <ul className="list-disc pl-5">
+                                            <li className="textSmall">Non Refundable</li>
+                                            <li className="textSmall">Full payment in advance</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className=" width-[30%] py-6 pr-6 rounded-lg ">
+                                <h4 className="textSmall">Start from</h4>
+                                <p className="text-2xl font-medium text-gray-800">$56<span className='textSmall uppercase'>/night</span></p>
                                 <div className="mt-4">
                                     <select
                                         id="room-select"
@@ -205,8 +264,30 @@ const HotelRooms = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-
+                    <div className="">
+                        <div className='stayUsSection'>
+                            <img src={heroImage} className='h-56 w-full' alt='bg' />
+                            <div className='dark-gray-background p-2 text-white'>
+                                <h5 className=" text-white text-center subheading" style={{ fontSize: '18px' }}>YOUR RESERVATION</h5>
+                                <hr className='my-3 border-t border-dashed' />
+                                <div className='flex flex-col px-3'>
+                                  <div className='flex flex-row justify-between'>
+                                    <p>CheckIn</p>
+                                    <p>18 Nov 2024</p>
+                                  </div>
+                                  <div className='flex flex-row justify-between'>
+                                    <p>CheckOut</p>
+                                    <p>18 Nov 2024</p>
+                                  </div>
+                                  <div className='flex flex-row justify-between'>
+                                    <p>Stay</p>
+                                    <p>1 Night, 2 Rooms, 2 Adults</p>
+                                  </div>
+                                </div>
+                                <hr className='my-3 border-t border-dashed' />
+                                <Link to='/checkout'><button className='mt-1 w-full bg-white text-black'>Book Now</button></Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -243,8 +324,6 @@ const HotelRooms = () => {
                 <div className="relative">
                     <Swiper
                         slidesPerView={1}
-                        // loop={true}
-                        //   modules={[Navigation]}
                         ref={swiperRef}
                     >
                         {testimonials.map((testimonial) => (
@@ -289,5 +368,4 @@ const HotelRooms = () => {
         </>
     )
 }
-
 export default HotelRooms

@@ -4,6 +4,7 @@ import { CgProfile } from 'react-icons/cg';
 import { FaBars } from 'react-icons/fa';
 import { IoMdClose } from 'react-icons/io';
 import {Link} from 'react-router-dom';
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [navbarBg, setNavbarBg] = useState('transparent');
@@ -12,8 +13,8 @@ const Navbar = () => {
   };
   useEffect(() => {
     const handleScroll = () => {
-      // const heroSection = document.querySelector('#HeroSection');
-      const roomSection = document.querySelector('#hotelRooms');
+      const heroSection = document.querySelector('#HeroSection');
+      // const roomSection = document.querySelector('#hotelRooms');
       const heroBottom = heroSection?.getBoundingClientRect().bottom || 0;
 
       // Change background color based on scroll position

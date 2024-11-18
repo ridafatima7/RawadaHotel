@@ -66,7 +66,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-4">
           <div className="flex items-center space-x-2">
             <CgProfile className="text-2xl" />
-            <Link to="#signin" className="hover:text-gray-300">Sign In</Link>
+            <Link to="/login" className="hover:text-gray-300">Sign In</Link>
           </div>
           <button className="bg-white text-black px-4 py-2 transition hover:bg-gray-200">Book Now</button>
         </div>
@@ -92,7 +92,7 @@ const Navbar = () => {
           <Link to="#news" className="hover:text-gray-400" onClick={toggleSidebar}>News</Link>
           <Link to="#about" className="hover:text-gray-400" onClick={toggleSidebar}>About Us</Link>
           <Link to="#contact" className="hover:text-gray-400" onClick={toggleSidebar}>Contact</Link>
-          <Link to="#signin" className="hover:text-gray-400 flex items-center space-x-2" onClick={toggleSidebar}>
+          <Link to="/login" className="hover:text-gray-400 flex items-center space-x-2" onClick={toggleSidebar}>
             <CgProfile className="text-2xl" />
             <span>Sign In</span>
           </Link>

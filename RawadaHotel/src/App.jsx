@@ -6,11 +6,13 @@ import Footer from './Components/NavbarFooter/Footer';
 import Navbar from './Components/NavbarFooter/Navbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ScrollToTop from './Components/ScrollToTop'
 function App() {
   return (
     <>
       <Router>
         <Navbar />
+        <ScrollToTop />
         <ToastContainer />
         <AppRoutes />
         <Footer />

@@ -7,7 +7,6 @@ import "swiper/css/navigation";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 import comma from "../../assets/icons/Quote.png";
 import { Link } from 'react-router-dom';
-import { IoWifi } from "react-icons/io5";
 import bathroom from "../../assets/icons/bathroom.png";
 import breakfast from "../../assets/icons/breakfast.png";
 import extrablanket from "../../assets/icons/ExtraBlanket.png";
@@ -15,6 +14,7 @@ import fridge from "../../assets/icons/fridge.png";
 import housekeeping from "../../assets/icons/housekeeping.png";
 import snakbar from "../../assets/icons/snakbar.png";
 import kettle from "../../assets/icons/kettle.png";
+import wifi from "../../assets/icons/wifi.png";
 import { DatePicker } from 'antd';
 const { RangePicker } = DatePicker;
 import dayjs from 'dayjs';
@@ -27,6 +27,10 @@ const HotelRooms = () => {
     const [rooms, setRooms] = useState(1);
     const [adults, setAdults] = useState(1);
     const dropdownRef = useRef(null);
+    const [selectedDates, setSelectedDates] = useState([null, null]);
+    const handleRangeChange = (dates) => {
+        setSelectedDates(dates);
+    };
     // Function to update button states
     const updateButtonState = () => {
         const swiper = swiperRef.current?.swiper;
@@ -91,7 +95,7 @@ const HotelRooms = () => {
         },
     ];
     const amenities = [
-        { icon: <IoWifi className="text-4xl text-gray-600" />, name: "WiFi" },
+        { icon: <img src={wifi} alt="wifi" className="w-10 h-10" />, name: "WiFi" },
         { icon: <img src={bathroom} alt="Bathroom" className="w-12 h-12" />, name: "Bathroom" },
         { icon: <img src={breakfast} alt="Breakfast" className="w-12 h-12" />, name: "Breakfast" },
         { icon: <img src={extrablanket} alt="Extra Blanket" className="w-12 h-12" />, name: "Extra Blanket" },
@@ -102,9 +106,6 @@ const HotelRooms = () => {
     ];
     const disablePastDates = (current) => {
         return current && current < new Date().setHours(0, 0, 0, 0);
-    };
-    const disableDatesBeforeCheckIn = (current) => {
-        return checkInDate && current < checkInDate;
     };
     // Close the dropdown when clicking outside
     useEffect(() => {
@@ -180,242 +181,232 @@ const HotelRooms = () => {
                         {/* ---------------Availabilty Strip------------- */}
                         <div className="pb-4">
                             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 border border-gray-300 bg-white">
-                                {/* Check-In Date */}
-                                <div className="flex flex-col">
-                                    <DatePicker
-                                        placeholder="Check-In"
-                                        onChange={(date) => setCheckInDate(date)}
-                                        disabledDate={disablePastDates}
+                                <div className="flex flex-col col-span-2">
+                                    <RangePicker
+                                        placeholder={['Check-In', 'Check-Out']}
+                                        onChange={handleRangeChange}
+                                        disabledDate={(current) => current && current < new Date().setHours(0, 0, 0, 0)}
                                         className="custom-date-picker p-2"
-                                        value={checkInDate}
+                                        value={selectedDates}
+                                        format="YYYY-MM-DD"
                                         suffixIcon={null}
+                                        style={{ width: '100%' }}
                                     />
                                 </div>
-                                {/* Check-Out Date */}
-                                <div className="flex flex-col">
-                                    <DatePicker
-                                        placeholder="Check-Out"
-                                        onChange={(date) => setCheckOutDate(date)}
-                                        disabledDate={disableDatesBeforeCheckIn}
-                                        className="custom-date-picker p-2"
-                                        value={checkOutDate}
-                                        suffixIcon={null}
-                                    />
-                                </div>
-                                <div className="relative flex flex-col">
-                                    <input
-                                        id="rooms"
-                                        type="text"
-                                        placeholder={`${rooms} Room${rooms > 1 ? "s" : ""} ${adults} Adult${adults > 1 ? "s" : ""}`}
-                                        className="roomAdult border-none bg-white outline-none p-2 cursor-pointer"
-                                        readOnly
-                                        onClick={() => setDropdownOpen((prev) => !prev)}
-                                    />
-                                    {dropdownOpen && (
-                                        <div
-                                            ref={dropdownRef}
-                                            className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-300 shadow-md p-4 z-10"
-                                        >
-                                            <div className="flex justify-between items-center mb-4">
-                                                <span>Rooms</span>
-                                                <div className="flex items-center ">
-                                                    <button
-                                                        onClick={() => setRooms((prev) => Math.max(1, prev - 1))}
-                                                        className="px-3 mr-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
-                                                    >
-                                                        -
-                                                    </button>
-                                                    <span>{rooms}</span>
-                                                    <button
-                                                        onClick={() => setRooms((prev) => Math.min(10, prev + 1))}
-                                                        className="px-3 ml-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
-                                                    >
-                                                        +
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div className="flex justify-between items-center">
-                                                <span>Adults</span>
-                                                <div className="flex items-center">
-                                                    <button
-                                                        onClick={() => setAdults((prev) => Math.max(1, prev - 1))}
-                                                        className="px-3 mr-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
-                                                    >
-                                                        -
-                                                    </button>
-                                                    <span>{adults}</span>
-                                                    <button
-                                                        onClick={() => setAdults((prev) => Math.min(10, prev + 1))}
-                                                        className="px-3  ml-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
-                                                    >
-                                                        +
-                                                    </button>
-                                                </div>
+                            <div className="relative flex flex-col">
+                                <input
+                                    id="rooms"
+                                    type="text"
+                                    placeholder={`${rooms} Room${rooms > 1 ? "s" : ""} ${adults} Adult${adults > 1 ? "s" : ""}`}
+                                    className="roomAdult border-none bg-white outline-none p-2 cursor-pointer"
+                                    readOnly
+                                    onClick={() => setDropdownOpen((prev) => !prev)}
+                                />
+                                {dropdownOpen && (
+                                    <div
+                                        ref={dropdownRef}
+                                        className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-300 shadow-md p-4 z-10"
+                                    >
+                                        <div className="flex justify-between items-center mb-4">
+                                            <span>Rooms</span>
+                                            <div className="flex items-center ">
+                                                <button
+                                                    onClick={() => setRooms((prev) => Math.max(1, prev - 1))}
+                                                    className="px-3 mr-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
+                                                >
+                                                    -
+                                                </button>
+                                                <span>{rooms}</span>
+                                                <button
+                                                    onClick={() => setRooms((prev) => Math.min(10, prev + 1))}
+                                                    className="px-3 ml-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
+                                                >
+                                                    +
+                                                </button>
                                             </div>
                                         </div>
-                                    )}
-                                </div>
-                                <div className="flex flex-col">
-                                    <button className="no-transform dark-gray-background text-white py-2 px-4  hover:bg-gray-700">
-                                        Check Availability
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='flex w-full flex-col md:flex-row mb-5 border border-l border-gray-300'>
-                            <div className="width-[35%]">
-                                <img
-                                    src={heroImage}
-                                    alt="Room Image 2"
-                                    className="w-full  h-56"
-                                />
-                                {/* <Swiper
-                                    spaceBetween={10}
-                                    navigation={true}
-                                    className="mySwiper"
-                                >
-                                    <SwiperSlide>
-                                        <img
-                                            src={heroBackground}
-                                            alt="Room Image 1"
-                                            className="w-full h-auto rounded-lg"
-                                        />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <img
-                                            src={heroBackground}
-                                            alt="Room Image 2"
-                                            className="w-full h-auto rounded-lg"
-                                        />
-                                    </SwiperSlide>
-                                </Swiper> */}
-                            </div>
-                            <div className="lg:col-span-1 overflow-hidden pl-6 pr-1 py-6 rounded-lg space-y-3 room-details">
-                                <h3 className="text-2xl font-light text-gray-800">Deluxe Room</h3>
-                                <div className="flex flex-col space-y-2">
-                                    <p className="text-xs" style={{ color: "#368aff" }}>Room Size: 322 Sq feet</p>
-                                    <p className="text-xs" style={{ color: "#368aff" }}>Bed size: 1 king/queen or twin</p>
-                                    <p className="text-xs overflow-hidden text-ellipsis whitespace-normal" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
-                                        Pearl is committed to creating and consistently delivering world-class luxury experiences.
-                                    </p>
-                                    <div className="flex flex-col space-y-2">
-                                        <ul className="list-disc pl-5">
-                                            <li className="textSmall">Non Refundable</li>
-                                            <li className="textSmall">Full payment in advance</li>
-                                        </ul>
+                                        <div className="flex justify-between items-center">
+                                            <span>Adults</span>
+                                            <div className="flex items-center">
+                                                <button
+                                                    onClick={() => setAdults((prev) => Math.max(1, prev - 1))}
+                                                    className="px-3 mr-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
+                                                >
+                                                    -
+                                                </button>
+                                                <span>{adults}</span>
+                                                <button
+                                                    onClick={() => setAdults((prev) => Math.min(10, prev + 1))}
+                                                    className="px-3  ml-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                )}
                             </div>
-                            <div className=" py-6 pr-6 pl-6 md:pl-0 room-selection-details">
-                                {/* <p className="textSmall">Start from <span className="text-2xl font-medium text-gray-800"> SAR56</span><span className='textSmall uppercase'>/night</span></p> */}
-                                <div>
-                                    <h4 className="textSmall">Start from</h4>
-                                    <p className="text-2xl font-medium text-gray-800">$56<span className='textSmall uppercase'>/night</span></p>
-                                </div>
-                                <div className="md:mt-16 ml-auto md:ml-0">
-                                    <select
-                                        id="room-select"
-                                        className="w-full rounded-none mt-2 p-2 bg-gray-800 text-white"
-                                    >
-                                        <option value="0">Room 0</option>
-                                        <option value="1">Room 1</option>
-                                        <option value="2">Room 2</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='flex w-full flex-col md:flex-row mb-5 border border-l border-gray-300'>
-                            <div className="width-[35%]">
-                                <img
-                                    src={heroImage}
-                                    alt="Room Image 2"
-                                    className="w-full  h-56"
-                                />
-                                {/* <Swiper
-                                    spaceBetween={10}
-                                    navigation={true}
-                                    className="mySwiper"
-                                >
-                                    <SwiperSlide>
-                                        <img
-                                            src={heroBackground}
-                                            alt="Room Image 1"
-                                            className="w-full h-auto rounded-lg"
-                                        />
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <img
-                                            src={heroBackground}
-                                            alt="Room Image 2"
-                                            className="w-full h-auto rounded-lg"
-                                        />
-                                    </SwiperSlide>
-                                </Swiper> */}
-                            </div>
-                            <div className="lg:col-span-1 overflow-hidden pl-6 pr-1 py-6 rounded-lg space-y-3 room-details">
-                                <h3 className="text-2xl font-light text-gray-800">Deluxe Room</h3>
-                                <div className="flex flex-col space-y-2">
-                                    <p className="text-xs" style={{ color: "#368aff" }}>Room Size: 322 Sq feet</p>
-                                    <p className="text-xs" style={{ color: "#368aff" }}>Bed size: 1 king/queen or twin</p>
-                                    <p className="text-xs overflow-hidden text-ellipsis whitespace-normal" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
-                                        Pearl is committed to creating and consistently delivering world-class luxury experiences.
-                                    </p>
-                                    <div className="flex flex-col space-y-2">
-                                        <ul className="list-disc pl-5">
-                                            <li className="textSmall">Non Refundable</li>
-                                            <li className="textSmall">Full payment in advance</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className=" py-6 pr-6 pl-6 md:pl-0 room-selection-details">
-                                {/* <p className="textSmall">Start from <span className="text-2xl font-medium text-gray-800"> SAR56</span><span className='textSmall uppercase'>/night</span></p> */}
-                                <div>
-                                    <h4 className="textSmall">Start from</h4>
-                                    <p className="text-2xl font-medium text-gray-800">$56<span className='textSmall uppercase'>/night</span></p>
-                                </div>
-                                <div className="md:mt-16 ml-auto md:ml-0">
-                                    <select
-                                        id="room-select"
-                                        className="w-full rounded-none mt-2 p-2 bg-gray-800 text-white"
-                                    >
-                                        <option value="0">Room 0</option>
-                                        <option value="1">Room 1</option>
-                                        <option value="2">Room 2</option>
-                                    </select>
-                                </div>
+                            <div className="flex flex-col">
+                                <button className="no-transform dark-gray-background text-white py-2 px-4  hover:bg-gray-700">
+                                    Check Availability
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div className="">
-                        <div className='stayUsSection'>
-                            <img src={heroImage} className='h-56 w-full' alt='bg' />
-                            <div className='dark-gray-background p-2 text-white'>
-                                <h5 className=" text-white text-center subheading" style={{ fontSize: '18px' }}>YOUR RESERVATION</h5>
-                                <hr className='my-3 border-t border-dashed' />
-                                <div className='flex flex-col px-3'>
-                                    <div className='flex flex-row justify-between'>
-                                        <p>CheckIn</p>
-                                        <p>18 Nov 2024</p>
-                                    </div>
-                                    <div className='flex flex-row justify-between'>
-                                        <p>CheckOut</p>
-                                        <p>18 Nov 2024</p>
-                                    </div>
-                                    <div className='flex flex-row justify-between'>
-                                        <p>Stay</p>
-                                        <p>1 Night, 2 Rooms, 2 Adults</p>
-                                    </div>
+                    <div className='flex w-full flex-col md:flex-row mb-5 border border-l border-gray-300'>
+                        <div className="width-[35%]">
+                            <img
+                                src={heroImage}
+                                alt="Room Image 2"
+                                className="w-full  h-56"
+                            />
+                            {/* <Swiper
+                                    spaceBetween={10}
+                                    navigation={true}
+                                    className="mySwiper"
+                                >
+                                    <SwiperSlide>
+                                        <img
+                                            src={heroBackground}
+                                            alt="Room Image 1"
+                                            className="w-full h-auto rounded-lg"
+                                        />
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <img
+                                            src={heroBackground}
+                                            alt="Room Image 2"
+                                            className="w-full h-auto rounded-lg"
+                                        />
+                                    </SwiperSlide>
+                                </Swiper> */}
+                        </div>
+                        <div className="lg:col-span-1 overflow-hidden pl-6 pr-1 py-6 rounded-lg space-y-3 room-details">
+                            <h3 className="text-2xl font-light text-gray-800">Deluxe Room</h3>
+                            <div className="flex flex-col space-y-2">
+                                <p className="text-xs" style={{ color: "#368aff" }}>Room Size: 322 Sq feet</p>
+                                <p className="text-xs" style={{ color: "#368aff" }}>Bed size: 1 king/queen or twin</p>
+                                <p className="text-xs overflow-hidden text-ellipsis whitespace-normal" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                                    Pearl is committed to creating and consistently delivering world-class luxury experiences.
+                                </p>
+                                <div className="flex flex-col space-y-2">
+                                    <ul className="list-disc pl-5">
+                                        <li className="textSmall">Non Refundable</li>
+                                        <li className="textSmall">Full payment in advance</li>
+                                    </ul>
                                 </div>
-                                <hr className='my-3 border-t border-dashed' />
-                                <Link to='/checkout'><button className='mt-1 w-full bg-white no-transform text-black'>Book Now</button></Link>
+                            </div>
+                        </div>
+                        <div className=" py-6 pr-6 pl-6 md:pl-0 room-selection-details">
+                            {/* <p className="textSmall">Start from <span className="text-2xl font-medium text-gray-800"> SAR56</span><span className='textSmall uppercase'>/night</span></p> */}
+                            <div>
+                                <h4 className="textSmall">Start from</h4>
+                                <p className="text-2xl font-medium text-gray-800">$56<span className='textSmall uppercase'>/night</span></p>
+                            </div>
+                            <div className="md:mt-16 ml-auto md:ml-0">
+                                <select
+                                    id="room-select"
+                                    className="w-full rounded-none mt-2 p-2 bg-gray-800 text-white"
+                                >
+                                    <option value="0">Room 0</option>
+                                    <option value="1">Room 1</option>
+                                    <option value="2">Room 2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='flex w-full flex-col md:flex-row mb-5 border border-l border-gray-300'>
+                        <div className="width-[35%]">
+                            <img
+                                src={heroImage}
+                                alt="Room Image 2"
+                                className="w-full  h-56"
+                            />
+                            {/* <Swiper
+                                    spaceBetween={10}
+                                    navigation={true}
+                                    className="mySwiper"
+                                >
+                                    <SwiperSlide>
+                                        <img
+                                            src={heroBackground}
+                                            alt="Room Image 1"
+                                            className="w-full h-auto rounded-lg"
+                                        />
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <img
+                                            src={heroBackground}
+                                            alt="Room Image 2"
+                                            className="w-full h-auto rounded-lg"
+                                        />
+                                    </SwiperSlide>
+                                </Swiper> */}
+                        </div>
+                        <div className="lg:col-span-1 overflow-hidden pl-6 pr-1 py-6 rounded-lg space-y-3 room-details">
+                            <h3 className="text-2xl font-light text-gray-800">Deluxe Room</h3>
+                            <div className="flex flex-col space-y-2">
+                                <p className="text-xs" style={{ color: "#368aff" }}>Room Size: 322 Sq feet</p>
+                                <p className="text-xs" style={{ color: "#368aff" }}>Bed size: 1 king/queen or twin</p>
+                                <p className="text-xs overflow-hidden text-ellipsis whitespace-normal" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                                    Pearl is committed to creating and consistently delivering world-class luxury experiences.
+                                </p>
+                                <div className="flex flex-col space-y-2">
+                                    <ul className="list-disc pl-5">
+                                        <li className="textSmall">Non Refundable</li>
+                                        <li className="textSmall">Full payment in advance</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div className=" py-6 pr-6 pl-6 md:pl-0 room-selection-details">
+                            {/* <p className="textSmall">Start from <span className="text-2xl font-medium text-gray-800"> SAR56</span><span className='textSmall uppercase'>/night</span></p> */}
+                            <div>
+                                <h4 className="textSmall">Start from</h4>
+                                <p className="text-2xl font-medium text-gray-800">$56<span className='textSmall uppercase'>/night</span></p>
+                            </div>
+                            <div className="md:mt-16 ml-auto md:ml-0">
+                                <select
+                                    id="room-select"
+                                    className="w-full rounded-none mt-2 p-2 bg-gray-800 text-white"
+                                >
+                                    <option value="0">Room 0</option>
+                                    <option value="1">Room 1</option>
+                                    <option value="2">Room 2</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            {/* ---------------Ammenities------------- */}
-            <section className="container-pink" id='hotelAmmenities'>
+                <div className="">
+                    <div className='stayUsSection'>
+                        <img src={heroImage} className='h-56 w-full' alt='bg' />
+                        <div className='dark-gray-background p-2 text-white'>
+                            <h5 className=" text-white text-center subheading" style={{ fontSize: '18px' }}>YOUR RESERVATION</h5>
+                            <hr className='my-3 border-t border-dashed' />
+                            <div className='flex flex-col px-3'>
+                                <div className='flex flex-row justify-between'>
+                                    <p>CheckIn</p>
+                                    <p>18 Nov 2024</p>
+                                </div>
+                                <div className='flex flex-row justify-between'>
+                                    <p>CheckOut</p>
+                                    <p>18 Nov 2024</p>
+                                </div>
+                                <div className='flex flex-row justify-between'>
+                                    <p>Stay</p>
+                                    <p>1 Night, 2 Rooms, 2 Adults</p>
+                                </div>
+                            </div>
+                            <hr className='my-3 border-t border-dashed' />
+                            <Link to='/checkout'><button className='mt-1 w-full bg-white no-transform text-black'>Book Now</button></Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section >
+            {/* ---------------Ammenities------------- */ }
+            < section className = "container-pink" id = 'hotelAmmenities' >
                 <div className="container py-12">
                     <h2 className="text-lg text-start subheading">AMENTIES & FACILTIES</h2>
                     <h3 className="text-xl mt-2 pt-2 pb-12 text-start heading">
@@ -435,9 +426,9 @@ const HotelRooms = () => {
                         ))}
                     </div>
                 </div>
-            </section>
-            {/* ---------------Reviews------------- */}
-            <section className="container py-12" id='hotelReviews'>
+            </section >
+    {/* ---------------Reviews------------- */ }
+    < section className = "container py-12" id = 'hotelReviews' >
                 <div className="">
                     <h2 className="text-lg text-center subheading">TESTIMONIAL</h2>
                     <h3 className="text-xl mt-2 pt-2 text-center heading">
@@ -487,7 +478,7 @@ const HotelRooms = () => {
                         </button>
                     </div>
                 </div>
-            </section>
+            </section >
         </>
     )
 }

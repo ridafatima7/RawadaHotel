@@ -99,7 +99,7 @@
 }
 .roomAdult::placeholder{
   font-size:14px;
-  color:rgb(191,191,191);
+  color:var(--dark-gray)
 }
 @media (max-width: 768px) {
 

@@ -75,10 +75,31 @@ button{
 button:hover{
   transform: scale(1.1);
 }
+.no-transform {
+  transition: none !important;
+  transform: none !important; 
+}
 .dark-gray-background{
     background-color:var(--dark-gray)
 }
+.custom-date-picker {
+  background-color: white !important; /* Set background color */
+  border: none !important; /* Remove border */
+  box-shadow: none !important; /* Remove outline on focus */
+  border-radius: 4px; /* Optional: Add rounded corners */
+  padding: 8px; /* Optional: Adjust padding */
+  font-size: 14px; /* Optional: Adjust font size */
+  color: black; /* Ensure text color is visible */
+}
 
+.custom-date-picker:hover {
+  border: none !important; /* Optional: Add hover effect */
+}
+
+.custom-date-picker:focus {
+  outline: none !important; /* Remove focus outline */
+  box-shadow: 0 0 0 2px #1890ff !important; /* Optional: Add custom focus shadow */
+}
 .custom-pagination {
     position: absolute;
     bottom: 20px; /* Adjust as needed */

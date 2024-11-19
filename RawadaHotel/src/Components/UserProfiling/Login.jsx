@@ -3,7 +3,7 @@ import heroImage from '../../assets/images/Background.png';
 
 const LoginSignup = () => {
   return (
-    <section className="container mx-auto mt-32 py-12">
+    <section className="container mx-auto mt-32 py-12" id='loginSignup'>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
         {/* Left Column - Form */}
         <div className="bg-white p-8 shadow-md rounded-md">

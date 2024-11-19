@@ -1,4 +1,4 @@
-/* ------------------Rooms--------------------------*/
+/* ------------------HomePage Rooms--------------------------*/
 
 .room-grid-images{
     height:15.54rem;
@@ -86,20 +86,43 @@
   opacity: 1; 
   width: 100%; 
 }
-
-
-
-
+.room-details{
+  width:40%;
+}
+.room-selection-details{
+  width:25%;
+  flex-direction: column;
+  display:flex;
+}
+.roomAdult{
+  border:none;
+}
+.roomAdult::placeholder{
+  font-size:14px;
+  color:rgb(191,191,191);
+}
 @media (max-width: 768px) {
 
-    /* ------------------Rooms------------------ */
+    /* ------------------HomePageRooms------------------ */
 
     .room-grid-single-column img {
         height: auto;
     }
+    
     /* -----------------HomeAbout------------------- */
 
    .lineHeight{
        line-height: 2;
-     }
+    }
+    /* -----------------hotel Rooms------------------- */
+
+     .room-details{
+      width:100%;
+    }
+    .room-selection-details{
+      width:100%;
+      flex-direction:row;
+      justify-content: space-between
+      ;
+    }
   }

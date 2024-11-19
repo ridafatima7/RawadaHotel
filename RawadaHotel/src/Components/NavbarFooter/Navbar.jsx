@@ -1,9 +1,9 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from '../../assets/images/LogoWhite.png';
 import { CgProfile } from 'react-icons/cg';
 import { FaBars } from 'react-icons/fa';
 import { IoMdClose } from 'react-icons/io';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,24 +14,29 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const heroSection = document.querySelector('#HeroSection');
-      // const roomSection = document.querySelector('#hotelRooms');
+      const roomSection = document.querySelector('#hotelRooms');
+      const LoginSignupSection = document.querySelector('#loginSignup');
+      // Get their bottom positions relative to the viewport
       const heroBottom = heroSection?.getBoundingClientRect().bottom || 0;
+      const roomBottom = roomSection?.getBoundingClientRect().bottom || 0;
 
       // Change background color based on scroll position
-      if (heroBottom <= 0) {
-        setNavbarBg('#705e59'); 
+      if (heroBottom > 0 || roomBottom > 0 || LoginSignupSection>0) {
+        // If either section is in view
+        setNavbarBg('transparent');
       } else {
-        setNavbarBg('transparent'); 
+        // If outside both sections
+        setNavbarBg('#705e59');
       }
-    };
+    }
 
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
   return (
-    <nav className="fixed top-0 left-0 w-full  text-white py-4 z-1000" style={{
+    <nav className="fixed top-0 left-0 w-full  text-white py-4 z-50" style={{
       backgroundColor: navbarBg,
       transition: 'background-color 0.3s ease-in-out',
     }}>

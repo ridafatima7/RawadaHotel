@@ -15,9 +15,18 @@ import fridge from "../../assets/icons/fridge.png";
 import housekeeping from "../../assets/icons/housekeeping.png";
 import snakbar from "../../assets/icons/snakbar.png";
 import kettle from "../../assets/icons/kettle.png";
+import { DatePicker } from 'antd';
+const { RangePicker } = DatePicker;
+import dayjs from 'dayjs';
 const HotelRooms = () => {
     const swiperRef = useRef(null);
     const [activeTab, setActiveTab] = useState('Rooms');
+    const [checkInDate, setCheckInDate] = useState(null);
+    const [checkOutDate, setCheckOutDate] = useState(null);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [rooms, setRooms] = useState(1);
+    const [adults, setAdults] = useState(2);
+    const dropdownRef = useRef(null);
     // Function to update button states
     const updateButtonState = () => {
         const swiper = swiperRef.current?.swiper;
@@ -91,6 +100,25 @@ const HotelRooms = () => {
         { icon: <img src={snakbar} alt="Snack Bar" className="w-12 h-12" />, name: "Snack Bar" },
         { icon: <img src={kettle} alt="Kettle" className="w-12 h-12" />, name: "Kettle" },
     ];
+    const disablePastDates = (current) => {
+        return current && current < new Date().setHours(0, 0, 0, 0);
+    };
+    const disableDatesBeforeCheckIn = (current) => {
+        return checkInDate && current < checkInDate;
+    };
+    // Close the dropdown when clicking outside
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleOutsideClick);
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideClick);
+        };
+    }, []);
     return (
         <>
             {/* ---------------First Section------------- */}
@@ -145,16 +173,101 @@ const HotelRooms = () => {
 
                 </div>
             </section>
+            {/* ---------------Availabilty Strip------------- */}
+            <section className="container py-12">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 border border-gray-300 bg-white">
+                    {/* Check-In Date */}
+                    <div className="flex flex-col">
+                        <DatePicker
+                            placeholder="Check-In"
+                            onChange={(date) => setCheckInDate(date)}
+                            disabledDate={disablePastDates}
+                            className="custom-date-picker p-2"
+                            value={checkInDate}
+                            suffixIcon={null}
+                        />
+                    </div>
+                    {/* Check-Out Date */}
+                    <div className="flex flex-col">
+                        <DatePicker
+                            placeholder="Check-Out"
+                            onChange={(date) => setCheckOutDate(date)}
+                            disabledDate={disableDatesBeforeCheckIn}
+                            className="custom-date-picker p-2"
+                            value={checkOutDate}
+                            suffixIcon={null}
+                        />
+                    </div>
+                    <div className="relative flex flex-col">
+                        <input
+                            id="rooms"
+                            type="text"
+                            placeholder={`${rooms} Room${rooms > 1 ? "s" : ""} ${adults} Adult${adults > 1 ? "s" : ""}`}
+                            className="roomAdult border-none bg-white outline-none p-2 cursor-pointer"
+                            readOnly
+                            onClick={() => setDropdownOpen((prev) => !prev)}
+                        />
+                        {dropdownOpen && (
+                            <div
+                                ref={dropdownRef}
+                                className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-300 shadow-md p-4 z-10"
+                            >
+                                <div className="flex justify-between items-center mb-4">
+                                    <span>Rooms</span>
+                                    <div className="flex items-center ">
+                                        <button
+                                            onClick={() => setRooms((prev) => Math.max(1, prev - 1))}
+                                            className="px-3 mr-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
+                                        >
+                                            -
+                                        </button>
+                                        <span>{rooms}</span>
+                                        <button
+                                            onClick={() => setRooms((prev) => Math.min(10, prev + 1))}
+                                            className="px-3 ml-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span>Adults</span>
+                                    <div className="flex items-center">
+                                        <button
+                                            onClick={() => setAdults((prev) => Math.max(1, prev - 1))}
+                                            className="px-3 mr-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
+                                        >
+                                            -
+                                        </button>
+                                        <span>{adults}</span>
+                                        <button
+                                                    onClick={() => setAdults((prev) => Math.min(10, prev + 1))}
+                                            className="px-3  ml-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    <div className="flex flex-col">
+                        <button className="no-transform dark-gray-background text-white py-2 px-4  hover:bg-gray-700">
+                            Check Availability
+                        </button>
+                    </div>
+                </div>
+            </section>
             {/* ---------------Rawada Rooms------------- */}
-            <section className='container py-12' id='rawadaRooms'>
+            <section className='container pb-12' id='rawadaRooms'>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div className="lg:col-span-2  rounded-lg ">
-                        <div className='flex w-full flex-row mb-5 border border-l border-gray-300'>
+                    <div className="lg:col-span-2 ">
+                        <div className='flex w-full flex-col md:flex-row mb-5 border border-l border-gray-300'>
                             <div className="width-[35%]">
                                 <img
                                     src={heroImage}
                                     alt="Room Image 2"
-                                    className="w-full h-56"
+                                    className="w-full  h-56"
                                 />
                                 {/* <Swiper
                                     spaceBetween={10}
@@ -177,12 +290,14 @@ const HotelRooms = () => {
                                     </SwiperSlide>
                                 </Swiper> */}
                             </div>
-                            <div className="lg:col-span-1 width-[35%]  p-6 rounded-lg space-y-3">
+                            <div className="lg:col-span-1 overflow-hidden pl-6 pr-1 py-6 rounded-lg space-y-3 room-details">
                                 <h3 className="text-2xl font-light text-gray-800">Deluxe Room</h3>
                                 <div className="flex flex-col space-y-2">
                                     <p className="text-xs" style={{ color: "#368aff" }}>Room Size: 322 Sq feet</p>
                                     <p className="text-xs" style={{ color: "#368aff" }}>Bed size: 1 king/queen or twin</p>
-                                    <p className="text-xs">Pearl is committed to creating and consistently delivering world-class luxury experiences.</p>
+                                    <p className="text-xs overflow-hidden text-ellipsis whitespace-normal" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                                        Pearl is committed to creating and consistently delivering world-class luxury experiences.
+                                    </p>
                                     <div className="flex flex-col space-y-2">
                                         <ul className="list-disc pl-5">
                                             <li className="textSmall">Non Refundable</li>
@@ -191,27 +306,30 @@ const HotelRooms = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" width-[30%] py-6 pr-6 rounded-lg ">
-                                <h4 className="textSmall">Start from</h4>
-                                <p className="text-2xl font-medium text-gray-800">$56<span className='textSmall uppercase'>/night</span></p>
-                                <div className="mt-4">
+                            <div className=" py-6 pr-6 pl-6 md:pl-0 room-selection-details">
+                                {/* <p className="textSmall">Start from <span className="text-2xl font-medium text-gray-800"> SAR56</span><span className='textSmall uppercase'>/night</span></p> */}
+                                <div>
+                                    <h4 className="textSmall">Start from</h4>
+                                    <p className="text-2xl font-medium text-gray-800">$56<span className='textSmall uppercase'>/night</span></p>
+                                </div>
+                                <div className="md:mt-16 ml-auto md:ml-0">
                                     <select
                                         id="room-select"
-                                        className="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        className="w-full rounded-none mt-2 p-2 bg-gray-800 text-white"
                                     >
-                                        <option value="deluxe">Room 0</option>
-                                        <option value="premium">Room 1</option>
-                                        <option value="standard">Room 2</option>
+                                        <option value="0">Room 0</option>
+                                        <option value="1">Room 1</option>
+                                        <option value="2">Room 2</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div className='flex w-full  flex-row mb-5 border border-l border-gray-300'>
+                        <div className='flex w-full flex-col md:flex-row mb-5 border border-l border-gray-300'>
                             <div className="width-[35%]">
                                 <img
                                     src={heroImage}
                                     alt="Room Image 2"
-                                    className="w-full h-56"
+                                    className="w-full  h-56"
                                 />
                                 {/* <Swiper
                                     spaceBetween={10}
@@ -234,12 +352,14 @@ const HotelRooms = () => {
                                     </SwiperSlide>
                                 </Swiper> */}
                             </div>
-                            <div className="lg:col-span-1 width-[35%]  p-6 rounded-lg space-y-3">
+                            <div className="lg:col-span-1 overflow-hidden pl-6 pr-1 py-6 rounded-lg space-y-3 room-details">
                                 <h3 className="text-2xl font-light text-gray-800">Deluxe Room</h3>
                                 <div className="flex flex-col space-y-2">
                                     <p className="text-xs" style={{ color: "#368aff" }}>Room Size: 322 Sq feet</p>
                                     <p className="text-xs" style={{ color: "#368aff" }}>Bed size: 1 king/queen or twin</p>
-                                    <p className="text-xs">Pearl is committed to creating and consistently delivering world-class luxury experiences.</p>
+                                    <p className="text-xs overflow-hidden text-ellipsis whitespace-normal" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                                        Pearl is committed to creating and consistently delivering world-class luxury experiences.
+                                    </p>
                                     <div className="flex flex-col space-y-2">
                                         <ul className="list-disc pl-5">
                                             <li className="textSmall">Non Refundable</li>
@@ -248,17 +368,20 @@ const HotelRooms = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className=" width-[30%] py-6 pr-6 rounded-lg ">
-                                <h4 className="textSmall">Start from</h4>
-                                <p className="text-2xl font-medium text-gray-800">$56<span className='textSmall uppercase'>/night</span></p>
-                                <div className="mt-4">
+                            <div className=" py-6 pr-6 pl-6 md:pl-0 room-selection-details">
+                                {/* <p className="textSmall">Start from <span className="text-2xl font-medium text-gray-800"> SAR56</span><span className='textSmall uppercase'>/night</span></p> */}
+                                <div>
+                                    <h4 className="textSmall">Start from</h4>
+                                    <p className="text-2xl font-medium text-gray-800">$56<span className='textSmall uppercase'>/night</span></p>
+                                </div>
+                                <div className="md:mt-16 ml-auto md:ml-0">
                                     <select
                                         id="room-select"
-                                        className="w-full mt-2 p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        className="w-full rounded-none mt-2 p-2 bg-gray-800 text-white"
                                     >
-                                        <option value="deluxe">Room 0</option>
-                                        <option value="premium">Room 1</option>
-                                        <option value="standard">Room 2</option>
+                                        <option value="0">Room 0</option>
+                                        <option value="1">Room 1</option>
+                                        <option value="2">Room 2</option>
                                     </select>
                                 </div>
                             </div>
@@ -271,18 +394,18 @@ const HotelRooms = () => {
                                 <h5 className=" text-white text-center subheading" style={{ fontSize: '18px' }}>YOUR RESERVATION</h5>
                                 <hr className='my-3 border-t border-dashed' />
                                 <div className='flex flex-col px-3'>
-                                  <div className='flex flex-row justify-between'>
-                                    <p>CheckIn</p>
-                                    <p>18 Nov 2024</p>
-                                  </div>
-                                  <div className='flex flex-row justify-between'>
-                                    <p>CheckOut</p>
-                                    <p>18 Nov 2024</p>
-                                  </div>
-                                  <div className='flex flex-row justify-between'>
-                                    <p>Stay</p>
-                                    <p>1 Night, 2 Rooms, 2 Adults</p>
-                                  </div>
+                                    <div className='flex flex-row justify-between'>
+                                        <p>CheckIn</p>
+                                        <p>18 Nov 2024</p>
+                                    </div>
+                                    <div className='flex flex-row justify-between'>
+                                        <p>CheckOut</p>
+                                        <p>18 Nov 2024</p>
+                                    </div>
+                                    <div className='flex flex-row justify-between'>
+                                        <p>Stay</p>
+                                        <p>1 Night, 2 Rooms, 2 Adults</p>
+                                    </div>
                                 </div>
                                 <hr className='my-3 border-t border-dashed' />
                                 <Link to='/checkout'><button className='mt-1 w-full bg-white text-black'>Book Now</button></Link>

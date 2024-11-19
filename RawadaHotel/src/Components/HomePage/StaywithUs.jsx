@@ -5,9 +5,13 @@ const StaywithUs = () => {
   return (
     <section
       className="bg-cover bg-center py-16 px-4"
-      style={{ backgroundImage: `url(${StaywithUsImage})` }}
+      style={{
+        background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${StaywithUsImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
     >
-      <div className="stayUsSection justify-center items-center bg-opacity-60 bg-black text-white flex flex-col p-8 space-y-6 md:space-y-8 max-w-xl mx-auto">
+      <div className="stayUsSection justify-center items-center bg-opacity-60  text-white flex flex-col p-8 space-y-6 md:space-y-8 max-w-xl mx-auto">
         <h2 className="text-lg subheading">STAY WITH US</h2>
         <h3 className="text-xl heading font-semibold text-center">Book Your Next Stay with Us</h3>
         <p className="textSmall max-w-lg text-center">

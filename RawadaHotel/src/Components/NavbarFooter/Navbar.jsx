@@ -15,13 +15,13 @@ const Navbar = () => {
     const handleScroll = () => {
       const heroSection = document.querySelector('#HeroSection');
       const roomSection = document.querySelector('#hotelRooms');
-      const LoginSignupSection = document.querySelector('#loginSignup');
+      // const LoginSignupSection = document.querySelector('#loginSignup');
       // Get their bottom positions relative to the viewport
       const heroBottom = heroSection?.getBoundingClientRect().bottom || 0;
       const roomBottom = roomSection?.getBoundingClientRect().bottom || 0;
 
       // Change background color based on scroll position
-      if (heroBottom > 0 || roomBottom > 0 || LoginSignupSection>0) {
+      if (heroBottom > 0 || roomBottom > 0 ) {
         // If either section is in view
         setNavbarBg('transparent');
       } else {
@@ -60,7 +60,7 @@ const Navbar = () => {
         {/* Navigation Links for Desktop (768px and above) */}
         <div className="hidden md:flex space-x-6 text-lg">
           <Link to="/" className="nav-link relative pb-1">Home</Link>
-          <Link to="/rooms" className="nav-link relative pb-1">Services</Link>
+          <Link to="/rooms" className="nav-link relative pb-1">Rooms</Link>
           <Link to="#news" className="nav-link relative pb-1">News</Link>
           <Link to="#about" className="nav-link relative pb-1">About Us</Link>
           <Link to="#contact" className="nav-link relative pb-1">Contact</Link>
@@ -93,7 +93,7 @@ const Navbar = () => {
         </div>
         <div className="flex flex-col space-y-4 px-4 mt-4 text-lg">
           <Link to="/" className="hover:text-gray-400" onClick={toggleSidebar}>Home</Link>
-          <Link to="/rooms" className="hover:text-gray-400" onClick={toggleSidebar}>Services</Link>
+          <Link to="/rooms" className="hover:text-gray-400" onClick={toggleSidebar}>Rooms</Link>
           <Link to="#news" className="hover:text-gray-400" onClick={toggleSidebar}>News</Link>
           <Link to="#about" className="hover:text-gray-400" onClick={toggleSidebar}>About Us</Link>
           <Link to="#contact" className="hover:text-gray-400" onClick={toggleSidebar}>Contact</Link>

@@ -25,7 +25,7 @@ const HotelRooms = () => {
     const [checkOutDate, setCheckOutDate] = useState(null);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [rooms, setRooms] = useState(1);
-    const [adults, setAdults] = useState(2);
+    const [adults, setAdults] = useState(1);
     const dropdownRef = useRef(null);
     // Function to update button states
     const updateButtonState = () => {
@@ -128,7 +128,7 @@ const HotelRooms = () => {
                     backgroundImage: `url(${heroBackground})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    height: '95vh',
+                    height: '92vh',
                 }}
                 id="hotelRooms"
             >
@@ -173,95 +173,95 @@ const HotelRooms = () => {
 
                 </div>
             </section>
-            {/* ---------------Availabilty Strip------------- */}
-            <section className="container py-12">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 border border-gray-300 bg-white">
-                    {/* Check-In Date */}
-                    <div className="flex flex-col">
-                        <DatePicker
-                            placeholder="Check-In"
-                            onChange={(date) => setCheckInDate(date)}
-                            disabledDate={disablePastDates}
-                            className="custom-date-picker p-2"
-                            value={checkInDate}
-                            suffixIcon={null}
-                        />
-                    </div>
-                    {/* Check-Out Date */}
-                    <div className="flex flex-col">
-                        <DatePicker
-                            placeholder="Check-Out"
-                            onChange={(date) => setCheckOutDate(date)}
-                            disabledDate={disableDatesBeforeCheckIn}
-                            className="custom-date-picker p-2"
-                            value={checkOutDate}
-                            suffixIcon={null}
-                        />
-                    </div>
-                    <div className="relative flex flex-col">
-                        <input
-                            id="rooms"
-                            type="text"
-                            placeholder={`${rooms} Room${rooms > 1 ? "s" : ""} ${adults} Adult${adults > 1 ? "s" : ""}`}
-                            className="roomAdult border-none bg-white outline-none p-2 cursor-pointer"
-                            readOnly
-                            onClick={() => setDropdownOpen((prev) => !prev)}
-                        />
-                        {dropdownOpen && (
-                            <div
-                                ref={dropdownRef}
-                                className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-300 shadow-md p-4 z-10"
-                            >
-                                <div className="flex justify-between items-center mb-4">
-                                    <span>Rooms</span>
-                                    <div className="flex items-center ">
-                                        <button
-                                            onClick={() => setRooms((prev) => Math.max(1, prev - 1))}
-                                            className="px-3 mr-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
-                                        >
-                                            -
-                                        </button>
-                                        <span>{rooms}</span>
-                                        <button
-                                            onClick={() => setRooms((prev) => Math.min(10, prev + 1))}
-                                            className="px-3 ml-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                    <span>Adults</span>
-                                    <div className="flex items-center">
-                                        <button
-                                            onClick={() => setAdults((prev) => Math.max(1, prev - 1))}
-                                            className="px-3 mr-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
-                                        >
-                                            -
-                                        </button>
-                                        <span>{adults}</span>
-                                        <button
-                                                    onClick={() => setAdults((prev) => Math.min(10, prev + 1))}
-                                            className="px-3  ml-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                    <div className="flex flex-col">
-                        <button className="no-transform dark-gray-background text-white py-2 px-4  hover:bg-gray-700">
-                            Check Availability
-                        </button>
-                    </div>
-                </div>
-            </section>
             {/* ---------------Rawada Rooms------------- */}
-            <section className='container pb-12' id='rawadaRooms'>
+            <section className='container py-12' id='rawadaRooms'>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div className="lg:col-span-2 ">
+                        {/* ---------------Availabilty Strip------------- */}
+                        <div className="pb-4">
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 border border-gray-300 bg-white">
+                                {/* Check-In Date */}
+                                <div className="flex flex-col">
+                                    <DatePicker
+                                        placeholder="Check-In"
+                                        onChange={(date) => setCheckInDate(date)}
+                                        disabledDate={disablePastDates}
+                                        className="custom-date-picker p-2"
+                                        value={checkInDate}
+                                        suffixIcon={null}
+                                    />
+                                </div>
+                                {/* Check-Out Date */}
+                                <div className="flex flex-col">
+                                    <DatePicker
+                                        placeholder="Check-Out"
+                                        onChange={(date) => setCheckOutDate(date)}
+                                        disabledDate={disableDatesBeforeCheckIn}
+                                        className="custom-date-picker p-2"
+                                        value={checkOutDate}
+                                        suffixIcon={null}
+                                    />
+                                </div>
+                                <div className="relative flex flex-col">
+                                    <input
+                                        id="rooms"
+                                        type="text"
+                                        placeholder={`${rooms} Room${rooms > 1 ? "s" : ""} ${adults} Adult${adults > 1 ? "s" : ""}`}
+                                        className="roomAdult border-none bg-white outline-none p-2 cursor-pointer"
+                                        readOnly
+                                        onClick={() => setDropdownOpen((prev) => !prev)}
+                                    />
+                                    {dropdownOpen && (
+                                        <div
+                                            ref={dropdownRef}
+                                            className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-300 shadow-md p-4 z-10"
+                                        >
+                                            <div className="flex justify-between items-center mb-4">
+                                                <span>Rooms</span>
+                                                <div className="flex items-center ">
+                                                    <button
+                                                        onClick={() => setRooms((prev) => Math.max(1, prev - 1))}
+                                                        className="px-3 mr-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
+                                                    >
+                                                        -
+                                                    </button>
+                                                    <span>{rooms}</span>
+                                                    <button
+                                                        onClick={() => setRooms((prev) => Math.min(10, prev + 1))}
+                                                        className="px-3 ml-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div className="flex justify-between items-center">
+                                                <span>Adults</span>
+                                                <div className="flex items-center">
+                                                    <button
+                                                        onClick={() => setAdults((prev) => Math.max(1, prev - 1))}
+                                                        className="px-3 mr-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
+                                                    >
+                                                        -
+                                                    </button>
+                                                    <span>{adults}</span>
+                                                    <button
+                                                        onClick={() => setAdults((prev) => Math.min(10, prev + 1))}
+                                                        className="px-3  ml-2 py-1 bg-gray-300 hover:bg-gray-400 rounded"
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex flex-col">
+                                    <button className="no-transform dark-gray-background text-white py-2 px-4  hover:bg-gray-700">
+                                        Check Availability
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                         <div className='flex w-full flex-col md:flex-row mb-5 border border-l border-gray-300'>
                             <div className="width-[35%]">
                                 <img
@@ -408,7 +408,7 @@ const HotelRooms = () => {
                                     </div>
                                 </div>
                                 <hr className='my-3 border-t border-dashed' />
-                                <Link to='/checkout'><button className='mt-1 w-full bg-white text-black'>Book Now</button></Link>
+                                <Link to='/checkout'><button className='mt-1 w-full bg-white no-transform text-black'>Book Now</button></Link>
                             </div>
                         </div>
                     </div>

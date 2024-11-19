@@ -12,7 +12,7 @@ const Checkout = () => {
                     backgroundImage: `url(${heroBackground})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    height: '95vh',
+                    height: '92vh',
                 }}
                 id="checkout"
             >
@@ -160,12 +160,13 @@ const Checkout = () => {
                                     className="h-4 w-4 text-gray-800 border-gray-300 rounded focus:ring-blue-500"
                                 />
                                 <label htmlFor="creditCard" className="ml-2 text-sm font-medium text-gray-700">
-                                    Do you have Credit Card?
+                                    We’ll send your confirmation to this email address.
+                                    By processing with this booking, I am agreeing to al-mokhtara <span className='text-red-400'>Terms & conditions</span>
                                 </label>
                             </div>
                             <Link to="/confirmBooking" ><button
                                 type="submit"
-                                className="w-full bg-black  text-white py-2"
+                                className="w-full mt-4 no-transform bg-black  text-white py-2"
                             >
                                 Confirm Booking
                             </button></Link>
@@ -283,18 +284,19 @@ export const ConfirmBooking = () => {
                             </div>
                         </div>
                         <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
-                           <Link to='/'><div>
+                            <Link to='/'><div>
                                 <button
                                     type="submit"
-                                    className="w-full bg-black  text-white py-2"
+                                    className="w-full no-transform bg-black  text-white py-2"
                                 >
                                     Go to HomePage
                                 </button>
-                            </div></Link> 
+                            </div></Link>
                             <div>
                                 <button
                                     type="submit"
-                                    className="w-full bg-white border border-l border-black text-black py-2"
+                                    className="w-full no-transform bg-white text-black py-2"
+                                    style={{ border: "1px solid black" }}
                                 >
                                     Download Receipt
                                 </button>

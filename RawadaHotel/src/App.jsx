@@ -4,15 +4,14 @@ import AppRoutes from './Components/Routes'
 import { BrowserRouter as Router } from 'react-router-dom';
 import Footer from './Components/NavbarFooter/Footer';
 import Navbar from './Components/NavbarFooter/Navbar';
-import { motion, useAnimation } from 'framer-motion';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
-  const controls = useAnimation();
-
   return (
     <>
       <Router>
         <Navbar />
+        <ToastContainer />
         <AppRoutes />
         <Footer />
       </Router>

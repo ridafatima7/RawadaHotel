@@ -9,7 +9,7 @@ const HeroSection = () => {
         backgroundImage: `url(${heroBackground})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        height: '95vh'
+        height: '92vh'
       }}
       id="HeroSection"
     >

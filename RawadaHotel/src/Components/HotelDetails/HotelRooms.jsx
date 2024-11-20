@@ -104,9 +104,6 @@ const HotelRooms = () => {
         { icon: <img src={snakbar} alt="Snack Bar" className="w-12 h-12" />, name: "Snack Bar" },
         { icon: <img src={kettle} alt="Kettle" className="w-12 h-12" />, name: "Kettle" },
     ];
-    const disablePastDates = (current) => {
-        return current && current < new Date().setHours(0, 0, 0, 0);
-    };
     // Close the dropdown when clicking outside
     useEffect(() => {
         const handleOutsideClick = (event) => {
@@ -114,7 +111,6 @@ const HotelRooms = () => {
                 setDropdownOpen(false);
             }
         };
-
         document.addEventListener("mousedown", handleOutsideClick);
         return () => {
             document.removeEventListener("mousedown", handleOutsideClick);
